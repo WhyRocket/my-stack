@@ -16,6 +16,10 @@ public class MyStack<T>
             Elements[count++] = element;
             EventChangeValue($"Добавленн элемент: {element}");
         }
+        else
+        {
+            return;
+        }
     }
 
     // Данный метод удаляет элемент из стэка.
@@ -24,6 +28,7 @@ public class MyStack<T>
         if (count == 0)
         {
             EventStackVoid($"Стэк пуст");
+            return;
         }
         Elements[count--] = default(T);
     }
