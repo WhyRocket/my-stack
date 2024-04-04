@@ -1,27 +1,30 @@
 ﻿namespace MyStack;
 
-internal class MyStack<T>
+public class MyStack<T>
 {
-    public event Action<string> OnCompleted;
+    private int count = 0;
+    public event Action<string> EventChangeValue;
+    public event Action<string> EventStackVoid;
 
-    public T? Value
+    private T[] Elements { get; set; } = new T[10];
+
+    // Данный метод добавляет элемент в стэк.
+    public void AddElement(T element)
     {
-        get
+        if ((count - 1) == Elements.Length)
         {
-            return Value;
+            Elements[count++] = element;
+            EventChangeValue($"Добавленн элемент: {element}");
         }
-        set
-        {
-            if (value is null)
-            {
-                OnCompleted($"Стэк стал пустым");
-            }
-            else
-            {
-                OnCompleted($"Добавлен новый элемент: {Value}");
-            }
+    }
 
-            Value = value;
+    // Данный метод удаляет элемент из стэка.
+    public void DeleteElement()
+    {
+        if (count == 0)
+        {
+            EventStackVoid($"Стэк пуст");
         }
+        Elements[count--] = default(T);
     }
 }
