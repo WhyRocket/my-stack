@@ -2,34 +2,46 @@
 
 public class MyStack<T>
 {
-    private int count = 0;
-    public event Action<string> EventChangeValue;
-    public event Action<string> EventStackVoid;
+    public int Count { get; private set; } = 0;
+    public int Capacity { get; private set; }
 
-    private T[] Elements { get; set; } = new T[10];
+    public event Action<string> onPush;
+    public event Action<string> onEmpty;
+    private T[] Elements { get; set; }
+
+    public MyStack(int count, int capacity)
+    {
+        this.Count = count;
+        Capacity = capacity;
+        Elements = new T[capacity];
+    }
+
 
     // Данный метод добавляет элемент в стэк.
-    public void AddElement(T element)
+    public void Push(T element)
     {
-        if ((count - 1) == Elements.Length)
+        if (Count < Capacity)
         {
-            Elements[count++] = element;
-            EventChangeValue($"Добавленн элемент: {element}");
+            Elements[Count] = element;
+            Count++;
+            onPush($"Добавленн элемент: {element}");
         }
         else
         {
-            return;
+            // To do: Реализовать своё исключение.
+            throw new Exception("Достигнута максимальная емкость стэка");
         }
     }
 
     // Данный метод удаляет элемент из стэка.
-    public void DeleteElement()
+    public void Pop()
     {
-        if (count == 0)
+        if (Count == 0)
         {
-            EventStackVoid($"Стэк пуст");
+            onEmpty($"Стэк пуст");
             return;
         }
-        Elements[count--] = default(T);
+        Elements[Count] = default(T);
+        Count--;
     }
 }
