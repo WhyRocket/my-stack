@@ -2,18 +2,20 @@
 
 public class MyStack<T>
 {
-    public int Count { get; private set; } = 0;
-    public int Capacity { get; private set; }
+    private readonly T[] _elements;
 
-    public event Action<string> onPush;
-    public event Action<string> onEmpty;
-    private T[] Elements { get; set; }
+    public int Count { get; private set; }
 
-    public MyStack(int count, int capacity)
+    public int Capacity { get; init; }
+
+    public event Action<T>? OnPush;
+
+    public event Action? OnEmpty;
+
+    public MyStack(int capacity)
     {
-        this.Count = count;
         Capacity = capacity;
-        Elements = new T[capacity];
+        _elements = new T[capacity];
     }
 
 
@@ -22,9 +24,13 @@ public class MyStack<T>
     {
         if (Count < Capacity)
         {
-            Elements[Count] = element;
+            _elements[Count] = element;
             Count++;
-            onPush($"Добавленн элемент: {element}");
+
+            if (OnPush is not null)
+            {
+                OnPush(element);
+            }
         }
         else
         {
@@ -36,12 +42,11 @@ public class MyStack<T>
     // Данный метод удаляет элемент из стэка.
     public void Pop()
     {
-        if (Count == 0)
-        {
-            onEmpty($"Стэк пуст");
-            return;
-        }
-        Elements[Count] = default(T);
         Count--;
+
+        if (Count == 0 && OnEmpty is not null)
+        {
+            OnEmpty();
+        }
     }
 }
