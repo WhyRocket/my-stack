@@ -49,4 +49,14 @@ public class MyStack<T>
             OnEmpty();
         }
     }
+
+    public T Top()
+    {
+        if (Count == 0)
+        {
+            throw new Exception("Стек пуст");
+        }
+
+        return _elements[Count - 1];
+    }
 }
