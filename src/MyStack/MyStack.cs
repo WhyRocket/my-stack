@@ -50,7 +50,7 @@ public class MyStack<T>
         }
     }
 
-    public T Top()
+    public T Peek()
     {
         if (Count == 0)
         {
