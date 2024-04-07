@@ -42,11 +42,18 @@ public class MyStack<T>
     // Данный метод удаляет элемент из стэка.
     public void Pop()
     {
-        Count--;
-
-        if (Count == 0 && OnEmpty is not null)
+        if (Count > 0)
         {
-            OnEmpty();
+            Count--;
+
+            if (Count == 0 && OnEmpty is not null)
+            {
+                OnEmpty();
+            }
+        }
+        else
+        {
+            throw new Exception("Стек пуст");
         }
     }
 }
