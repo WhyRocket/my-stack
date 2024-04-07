@@ -10,6 +10,8 @@ public class MyStack<T>
 
     public event Action<T>? OnPush;
 
+    public event Action<T>? OnPop;
+
     public event Action? OnEmpty;
 
     public MyStack(int capacity)
@@ -42,6 +44,11 @@ public class MyStack<T>
     // Данный метод удаляет элемент из стэка.
     public void Pop()
     {
+        if (OnPop is not null)
+        {
+            OnPop(_elements[Count]);
+        }
+
         Count--;
 
         if (Count == 0 && OnEmpty is not null)
