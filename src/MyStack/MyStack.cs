@@ -6,7 +6,21 @@ public class MyStack<T>
 
     public int Count { get; private set; }
 
-    public int Capacity { get; init; }
+    public int Capacity
+    {
+        get { return Capacity; }
+        init
+        {
+            if (value > 0 && value <= 500)
+            {
+                Capacity = value;
+            }
+            else
+            {
+                throw new Exception("Значение емкости стека должно быть в диапозоне от 1 до 500");
+            }
+        }
+    }
 
     public event Action<T>? OnPush;
 
