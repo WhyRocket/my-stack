@@ -1,17 +1,39 @@
 ﻿namespace MyStack;
 
-public class MyStack<T>(int capacity)
+public class MyStack<T>
 {
-    private readonly T[] _elements = new T[capacity];
+    private const int _maxCapacity = 500;
+
+    private readonly int _capacity;
+    private readonly T[] _elements;
 
     public int Count { get; private set; }
 
-    public int Capacity { get; init; } = capacity;
+    public int Capacity
+    {
+        get { return _capacity; }
+        init
+        {
+            if (value > 0 && value <= _maxCapacity)
+            {
+                _capacity = value;
+            }
+            else
+            {
+                throw new Exception($"Значение емкости стека должно быть в диапозоне от 1 до {_maxCapacity}");
+            }
+        }
+    }
 
     public event Action<T>? OnPush;
 
     public event Action? OnEmpty;
 
+    public MyStack(int capacity)
+    {
+        Capacity = capacity;
+        _elements = new T[Capacity];
+    }
 
     // Данный метод добавляет элемент в стэк.
     public void Push(T element)
