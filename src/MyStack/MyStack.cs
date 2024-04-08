@@ -1,8 +1,8 @@
 ﻿namespace MyStack;
 
-public class MyStack<T>
+public class MyStack<T>(int capacity)
 {
-    private readonly T[] _elements;
+    private readonly T[] _elements = new T[capacity];
 
     public int Count { get; private set; }
 
@@ -25,12 +25,6 @@ public class MyStack<T>
     public event Action<T>? OnPush;
 
     public event Action? OnEmpty;
-
-    public MyStack(int capacity)
-    {
-        Capacity = capacity;
-        _elements = new T[capacity];
-    }
 
 
     // Данный метод добавляет элемент в стэк.
@@ -62,5 +56,15 @@ public class MyStack<T>
         {
             OnEmpty();
         }
+    }
+
+    public T Peek()
+    {
+        if (Count == 0)
+        {
+            throw new Exception("Стек пуст");
+        }
+
+        return _elements[Count - 1];
     }
 }
