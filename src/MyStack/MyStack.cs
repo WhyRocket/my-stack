@@ -2,7 +2,8 @@
 
 public class MyStack<T>
 {
-    private readonly int _maxCapacity = 500;
+    private const int _maxCapacity = 500;
+
     private readonly int _capacity;
     private readonly T[] _elements;
 
@@ -33,7 +34,6 @@ public class MyStack<T>
         Capacity = capacity;
         _elements = new T[Capacity];
     }
-
 
     // Данный метод добавляет элемент в стэк.
     public void Push(T element)
