@@ -2,11 +2,28 @@
 
 public class MyStack<T>
 {
+    private const int _maxCapacity = 500;
+
+    private readonly int _capacity;
     private readonly T[] _elements;
 
     public int Count { get; private set; }
 
-    public int Capacity { get; init; }
+    public int Capacity
+    {
+        get { return _capacity; }
+        init
+        {
+            if (value > 0 && value <= _maxCapacity)
+            {
+                _capacity = value;
+            }
+            else
+            {
+                throw new Exception($"Значение емкости стека должно быть в диапозоне от 1 до {_maxCapacity}");
+            }
+        }
+    }
 
     public event Action<T>? OnPush;
 
@@ -17,9 +34,8 @@ public class MyStack<T>
     public MyStack(int capacity)
     {
         Capacity = capacity;
-        _elements = new T[capacity];
+        _elements = new T[Capacity];
     }
-
 
     // Данный метод добавляет элемент в стэк.
     public void Push(T element)
@@ -53,7 +69,26 @@ public class MyStack<T>
 
         if (Count == 0 && OnEmpty is not null)
         {
-            OnEmpty();
+            Count--;
+
+            if (Count == 0 && OnEmpty is not null)
+            {
+                OnEmpty();
+            }
         }
+        else
+        {
+            throw new Exception("Стек пуст");
+        }
+    }
+
+    public T Peek()
+    {
+        if (Count == 0)
+        {
+            throw new Exception("Стек пуст");
+        }
+
+        return _elements[Count - 1];
     }
 }
