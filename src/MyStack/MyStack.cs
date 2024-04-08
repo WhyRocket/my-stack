@@ -1,19 +1,20 @@
 ﻿namespace MyStack;
 
-public class MyStack<T>(int capacity)
+public class MyStack<T>
 {
-    private readonly T[] _elements = new T[capacity];
+    private readonly int _capacity;
+    private readonly T[] _elements;
 
     public int Count { get; private set; }
 
     public int Capacity
     {
-        get { return Capacity; }
+        get { return _capacity; }
         init
         {
             if (value > 0 && value <= 500)
             {
-                Capacity = value;
+                _capacity = value;
             }
             else
             {
@@ -25,6 +26,12 @@ public class MyStack<T>(int capacity)
     public event Action<T>? OnPush;
 
     public event Action? OnEmpty;
+
+    public MyStack(int capacity)
+    {
+        Capacity = capacity;
+        _elements = new T[Capacity];
+    }
 
 
     // Данный метод добавляет элемент в стэк.
