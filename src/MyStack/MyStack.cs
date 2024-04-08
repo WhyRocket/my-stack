@@ -43,4 +43,14 @@ public class MyStack<T>(int capacity)
             OnEmpty();
         }
     }
+
+    public T Peek()
+    {
+        if (Count == 0)
+        {
+            throw new Exception("Стек пуст");
+        }
+
+        return _elements[Count - 1];
+    }
 }
