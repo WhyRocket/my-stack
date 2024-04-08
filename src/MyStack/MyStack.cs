@@ -2,6 +2,7 @@
 
 public class MyStack<T>
 {
+    private readonly int _maxCapacity = 500;
     private readonly int _capacity;
     private readonly T[] _elements;
 
@@ -12,13 +13,13 @@ public class MyStack<T>
         get { return _capacity; }
         init
         {
-            if (value > 0 && value <= 500)
+            if (value > 0 && value <= _maxCapacity)
             {
                 _capacity = value;
             }
             else
             {
-                throw new Exception("Значение емкости стека должно быть в диапозоне от 1 до 500");
+                throw new Exception($"Значение емкости стека должно быть в диапозоне от 1 до {_maxCapacity}");
             }
         }
     }
