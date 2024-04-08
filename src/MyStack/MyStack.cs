@@ -60,25 +60,23 @@ public class MyStack<T>
     // Данный метод удаляет элемент из стэка.
     public void Pop()
     {
-        if (OnPop is not null)
+        if (Count > 0)
         {
-            OnPop(_elements[Count]);
-        }
-
-        Count--;
-
-        if (Count == 0 && OnEmpty is not null)
-        {
-            Count--;
-
-            if (Count == 0 && OnEmpty is not null)
+            if (OnPop is not null)
             {
-                OnEmpty();
+                OnPop(_elements[Count]);
             }
+
+            Count--;
         }
         else
         {
             throw new Exception("Стек пуст");
+        }
+
+        if (Count == 0 && OnEmpty is not null)
+        {
+            OnEmpty();
         }
     }
 
