@@ -6,7 +6,7 @@ public class MyStack<T>(int capacity)
 
     public int Count { get; private set; }
 
-    public required int Capacity { get; init; } = capacity;
+    public int Capacity { get; init; } = capacity;
 
     public event Action<T>? OnPush;
 
