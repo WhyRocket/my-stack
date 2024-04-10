@@ -27,6 +27,8 @@ public class MyStack<T>
 
     public event Action<T>? OnPush;
 
+    public event Action<T>? OnPop;
+
     public event Action? OnEmpty;
 
     public MyStack(int capacity)
@@ -60,6 +62,11 @@ public class MyStack<T>
     {
         if (Count > 0)
         {
+            if (OnPop is not null)
+            {
+                OnPop(_elements[Count - 1]);
+            }
+
             Count--;
 
             if (Count == 0 && OnEmpty is not null)
