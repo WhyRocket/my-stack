@@ -64,19 +64,19 @@ public class MyStack<T>
         {
             if (OnPop is not null)
             {
-                OnPop(_elements[Count]);
+                OnPop(_elements[Count - 1]);
             }
 
             Count--;
+
+            if (Count == 0 && OnEmpty is not null)
+            {
+                OnEmpty();
+            }
         }
         else
         {
             throw new Exception("Стек пуст");
-        }
-
-        if (Count == 0 && OnEmpty is not null)
-        {
-            OnEmpty();
         }
     }
 
