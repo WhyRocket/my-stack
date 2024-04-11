@@ -1,4 +1,6 @@
-﻿namespace MyStack;
+﻿using MyStack.Exceptions;
+
+namespace MyStack;
 
 internal class Program
 {
@@ -41,7 +43,7 @@ internal class Program
             stack1.Push(4);
             stack1.Push(5);
         }
-        catch (InvalidOperationException ex) 
+        catch (MyStackException ex) 
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -54,7 +56,7 @@ internal class Program
         {
             stack2.Pop();
         }
-        catch (InvalidOperationException ex)
+        catch (MyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -66,7 +68,7 @@ internal class Program
         {
             MyStack<int> stack3 = new(1000);
         }
-        catch(InvalidOperationException ex)
+        catch(MyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -80,7 +82,7 @@ internal class Program
         {
             stack4.Peek();
         }
-        catch (InvalidOperationException ex)
+        catch (MyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
