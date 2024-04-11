@@ -1,4 +1,6 @@
-﻿namespace MyStack;
+﻿using MyStack.Exceptions;
+
+namespace MyStack;
 
 public class MyStack<T>
 {
@@ -20,7 +22,7 @@ public class MyStack<T>
             }
             else
             {
-                throw new Exception($"Значение емкости стека должно быть в диапозоне от 1 до {_maxCapacity}");
+                throw new CapacityExceededMyStackException(_maxCapacity);
             }
         }
     }
@@ -76,7 +78,7 @@ public class MyStack<T>
         }
         else
         {
-            throw new Exception("Стек пуст");
+            throw new EmptyMyStackException();
         }
     }
 
@@ -84,7 +86,7 @@ public class MyStack<T>
     {
         if (Count == 0)
         {
-            throw new Exception("Стек пуст");
+            throw new EmptyMyStackException();
         }
 
         return _elements[Count - 1];
