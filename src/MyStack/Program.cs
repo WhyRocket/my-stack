@@ -43,7 +43,7 @@ internal class Program
             stack1.Push(4);
             stack1.Push(5);
         }
-        catch (MyStackException ex) 
+        catch (CapacityExceededMyStackException ex) 
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -56,7 +56,7 @@ internal class Program
         {
             stack2.Pop();
         }
-        catch (MyStackException ex)
+        catch (EmptyMyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -68,7 +68,7 @@ internal class Program
         {
             MyStack<int> stack3 = new(1000);
         }
-        catch(MyStackException ex)
+        catch(CapacityExceededMyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -82,7 +82,7 @@ internal class Program
         {
             stack4.Peek();
         }
-        catch (MyStackException ex)
+        catch (EmptyMyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
