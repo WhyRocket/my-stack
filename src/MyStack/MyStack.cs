@@ -54,8 +54,7 @@ public class MyStack<T>
         }
         else
         {
-            // To do: Реализовать своё исключение.
-            throw new Exception("Достигнута максимальная емкость стэка");
+            throw new CapacityExceededMyStackException(_maxCapacity);
         }
     }
 
