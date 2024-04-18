@@ -1,6 +1,8 @@
-﻿namespace MyStack;
+﻿using System.Collections;
 
-public sealed class MyLinkedList<T>
+namespace MyStack;
+
+public sealed class MyLinkedList<T> : IEnumerable<T>
 {
     private sealed class Node<T>(T value)
     {
@@ -68,5 +70,15 @@ public sealed class MyLinkedList<T>
     public bool Contains(T data)
     {
         return true;
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        throw new NotImplementedException();
     }
 }
