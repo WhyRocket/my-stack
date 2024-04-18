@@ -1,10 +1,10 @@
 ﻿namespace MyStack;
 
-internal class MyLinkedList<T>
+public sealed class MyLinkedList<T>
 {
     private sealed class Node<T>(T value)
     {
-        public T Value { get; set; } = value;
+        public T Value { get; init; } = value;
         public Node<T>? Next { get; set; }
         public Node<T>? Previous { get; set; }
     }
