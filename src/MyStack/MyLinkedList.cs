@@ -16,12 +16,40 @@ public sealed class MyLinkedList<T>
 
     public void AddLast(T data)
     {
+        Node<T> node = new(data);
 
+        if (Count != 0)
+        {
+            _tail.Next = node;
+            node.Previous = _tail;
+        }
+        else
+        {
+            _head = node;
+        }
+
+        _tail = node;
+
+        Count++;
     }
 
     public void AddFirst(T data)
     {
+        Node<T> node = new(data);
 
+        if (Count != 0)
+        {
+            _head.Previous = node;
+            node.Next = _head;
+        }
+        else
+        {
+            _tail = node;
+        }
+
+        _head = node;
+
+        Count++;
     }
 
     public void Remove()
