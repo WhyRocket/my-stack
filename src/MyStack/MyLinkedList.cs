@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Xml.Linq;
 
 namespace MyStack;
 
@@ -56,9 +57,35 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
         Count++;
     }
 
-    public void Remove()
+    public void Remove(T value)
     {
+        if (Count == 0)
+        {
+            throw new InvalidOperationException();
+        }
 
+        Node node = _head!;
+
+        while (node is not null)
+        {
+            if (node.Value!.Equals(value))
+            {
+                if (node.Next is not null && node.Previous is not null)
+                {
+                    node.Previous.Next = node.Next;
+                    node.Next.Previous = node.Previous;
+                    Count--;
+                } 
+                else if (node.Previous is not null)
+                { 
+                    node.Previous.Next = null;
+                }
+                else
+                {
+                    Clear();
+                }
+            }
+        }
     }
 
     public void Clear()
