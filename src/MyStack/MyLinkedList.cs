@@ -9,6 +9,6 @@ public sealed class MyLinkedList<T>
         public Node<T>? Previous { get; set; }
     }
 
-    private Node<T>? head;
-    private Node<T>? tail;
+    private Node<T>? _head;
+    private Node<T>? _tail;
 }
