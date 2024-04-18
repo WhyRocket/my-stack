@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Xml.Linq;
 
 namespace MyStack;
 
@@ -21,6 +20,11 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
 
     public void AddLast(T data)
     {
+        if (data is null)
+        {
+            throw new ArgumentNullException(nameof(data));
+        }
+
         Node node = new(data);
 
         if (Count != 0)
@@ -40,6 +44,11 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
 
     public void AddFirst(T data)
     {
+        if (data is null)
+        {
+            throw new ArgumentNullException(nameof(data));
+        }
+
         Node node = new(data);
 
         if (Count != 0)
@@ -75,9 +84,9 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
                     node.Previous.Next = node.Next;
                     node.Next.Previous = node.Previous;
                     Count--;
-                } 
+                }
                 else if (node.Previous is not null)
-                { 
+                {
                     node.Previous.Next = null;
                 }
                 else
