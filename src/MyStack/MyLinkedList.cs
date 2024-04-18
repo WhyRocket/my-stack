@@ -18,7 +18,7 @@ public sealed class MyLinkedList<T>
     {
         Node<T> node = new(data);
 
-        if (_head is not null)
+        if (Count != 0)
         {
             _tail.Next = node;
             node.Previous = _tail;
@@ -37,7 +37,7 @@ public sealed class MyLinkedList<T>
     {
         Node<T> node = new(data);
 
-        if (_tail is not null)
+        if (Count != 0)
         {
             _head.Previous = node;
             node.Next = _head;
