@@ -86,6 +86,13 @@ internal class Program
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
+
+        var list = new MyLinkedList<int>();
+
+        foreach (object? value in list)
+        {
+            Console.WriteLine((int)value);
+        }
     }
 }
 

@@ -1,26 +1,30 @@
-﻿namespace MyStack;
+﻿using System.Collections;
 
-public sealed class MyLinkedList<T>
+namespace MyStack;
+
+public sealed class MyLinkedList<T> : IEnumerable<T>
 {
-    private sealed class Node<T>(T value)
+    private sealed class Node(T value)
     {
         public T Value { get; init; } = value;
-        public Node<T>? Next { get; set; }
-        public Node<T>? Previous { get; set; }
+
+        public Node? Next { get; set; }
+
+        public Node? Previous { get; set; }
     }
 
-    private Node<T>? _head;
-    private Node<T>? _tail;
+    private Node? _head;
+    private Node? _tail;
 
     public int Count { get; private set; }
 
     public void AddLast(T data)
     {
-        Node<T> node = new(data);
+        Node node = new(data);
 
         if (Count != 0)
         {
-            _tail.Next = node;
+            _tail!.Next = node;
             node.Previous = _tail;
         }
         else
@@ -35,11 +39,11 @@ public sealed class MyLinkedList<T>
 
     public void AddFirst(T data)
     {
-        Node<T> node = new(data);
+        Node node = new(data);
 
         if (Count != 0)
         {
-            _head.Previous = node;
+            _head!.Previous = node;
             node.Next = _head;
         }
         else
@@ -68,5 +72,18 @@ public sealed class MyLinkedList<T>
     public bool Contains(T data)
     {
         return true;
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        var node = _head;
+
+        while (node is not null)
+        {
+            yield return node.Value;
+            node = node.Next;
+        }
     }
 }
