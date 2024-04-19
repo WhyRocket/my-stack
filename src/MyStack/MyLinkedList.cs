@@ -81,23 +81,19 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
                     Count--;
                     return true;
                 }
-                else if (node.Next is not null || node.Previous is not null)
+                else if (node.Next is not null)
                 {
-                    if (node.Next is not null)
-                    {
-                        node.Next.Previous = null;
-                        _head = node.Next;
-                        return true;
-                    }
-
-                    if (node.Previous is not null)
-                    {
-                        node.Previous.Next = null;
-                        _tail = node.Previous;
-                        return true;
-                    }
-
+                    node.Next.Previous = null;
+                    _head = node.Next;
                     Count--;
+                    return true;
+                }
+                else if (node.Previous is not null)
+                {
+                    node.Previous.Next = null;
+                    _tail = node.Previous;
+                    Count--;
+                    return true;
                 }
                 else
                 {
