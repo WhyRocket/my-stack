@@ -20,6 +20,11 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
 
     public void AddLast(T data)
     {
+        if (data is null)
+        {
+            throw new ArgumentNullException(nameof(data));
+        }
+
         Node node = new(data);
 
         if (Count != 0)
@@ -39,6 +44,11 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
 
     public void AddFirst(T data)
     {
+        if (data is null)
+        {
+            throw new ArgumentNullException(nameof(data));
+        }
+
         Node node = new(data);
 
         if (Count != 0)
@@ -56,9 +66,44 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
         Count++;
     }
 
-    public void Remove()
+    public bool Remove(T value)
     {
+        Node? node = _head;
 
+        while (node is not null)
+        {
+            if (node.Value!.Equals(value))
+            {
+                if (node.Next is not null && node.Previous is not null)
+                {
+                    node.Previous.Next = node.Next;
+                    node.Next.Previous = node.Previous;
+                    Count--;
+                    return true;
+                }
+                else if (node.Next is not null)
+                {
+                    node.Next.Previous = null;
+                    _head = node.Next;
+                    Count--;
+                    return true;
+                }
+                else if (node.Previous is not null)
+                {
+                    node.Previous.Next = null;
+                    _tail = node.Previous;
+                    Count--;
+                    return true;
+                }
+                else
+                {
+                    Clear();
+                    return true;
+                }
+            }
+            node = node.Next;
+        }
+        return false;
     }
 
     public void Clear()
