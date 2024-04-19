@@ -66,14 +66,9 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
         Count++;
     }
 
-    public void Remove(T value)
+    public bool Remove(T value)
     {
-        if (Count == 0)
-        {
-            throw new InvalidOperationException();
-        }
-
-        Node node = _head!;
+        Node? node = _head;
 
         while (node is not null)
         {
@@ -84,17 +79,35 @@ public sealed class MyLinkedList<T> : IEnumerable<T>
                     node.Previous.Next = node.Next;
                     node.Next.Previous = node.Previous;
                     Count--;
+                    return true;
                 }
-                else if (node.Previous is not null)
+                else if (node.Next is not null || node.Previous is not null)
                 {
-                    node.Previous.Next = null;
+                    if (node.Next is not null)
+                    {
+                        node.Next.Previous = null;
+                        _head = node.Next;
+                        return true;
+                    }
+
+                    if (node.Previous is not null)
+                    {
+                        node.Previous.Next = null;
+                        _tail = node.Previous;
+                        return true;
+                    }
+
+                    Count--;
                 }
                 else
                 {
                     Clear();
+                    return true;
                 }
             }
+            node = node.Next;
         }
+        return false;
     }
 
     public void Clear()
