@@ -4,31 +4,52 @@ public class MyLinkedStack<T>
 {
     private class Node(T value)
     {
-        public T Value { get; set; } = value;
+        public T Value { get; init; } = value;
         public Node? Previous { get; set; }
     }
 
     // Верхний элемент стека.
-    private Node? _head;
+    private Node? _top;
 
-    // Свойство, которое возварщает количесвто элементов в стеке.
-    public int Size { get; private set; }
+    // Свойство, которое возвращает количесвто элементов в стеке.
+    public int Count { get; private set; }
 
     // Метод для добавления элемента.
     public void Push (T data)
     {
+        Node node = new(data);
 
+        if (_top is not null)
+        {
+            node.Previous = _top;
+            _top = node;
+        }
+        else
+        {
+            _top = node;
+        }
+
+        Count++;
     }
 
     // Метод для удаления элемента.
     public void Pop()
     {
-
+        if (_top is not null && _top.Previous is not null)
+        {
+            _top = _top.Previous;
+            Count--;
+        }
     }
 
     // Метод для считывания верхнего элемента.
     public T Peek ()
     {
-        return default(T);
+        if (_top is null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        return _top.Value;
     }
 }
