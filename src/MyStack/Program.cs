@@ -6,6 +6,10 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        MyLinkedListDemo();
+    }
+    public static void MyStackDemo()
+    {
         MyStack<int> stack = new(10);
 
         // Событие добавления элемента в стек.
@@ -18,7 +22,7 @@ internal class Program
         stack.OnEmpty += () => Console.WriteLine("СТЭК ПУСТ !!!");
 
 
-        // Демонстрация рабоыт методов
+        // Демонстрация работы методов
         stack.Push(1);
         stack.Push(2);
         stack.Push(3);
@@ -43,7 +47,7 @@ internal class Program
             stack1.Push(4);
             stack1.Push(5);
         }
-        catch (CapacityExceededMyStackException ex) 
+        catch (CapacityExceededMyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -68,7 +72,7 @@ internal class Program
         {
             MyStack<int> stack3 = new(1000);
         }
-        catch(CapacityExceededMyStackException ex)
+        catch (CapacityExceededMyStackException ex)
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
@@ -86,12 +90,60 @@ internal class Program
         {
             Console.WriteLine($"Ошибка!\nТекст ошибки: {ex.Message}");
         }
+    }
 
-        var list = new MyLinkedList<int>();
+    public static void MyLinkedListDemo()
+    {
+        // Инициализация коллекции.
+        var list = new MyLinkedList<int?>();
 
-        foreach (object? value in list)
+        // Демонстрация добавления элементов.
+        list.AddFirst(1);
+        list.AddFirst(2);
+        list.AddFirst(3);
+
+        list.AddLast(4);
+        list.AddLast(5);
+        list.AddLast(6);
+
+        Console.WriteLine("В коллекцию добавлено 6 элементов:");
+
+        foreach (var item in list)
         {
-            Console.WriteLine((int)value);
+            Console.WriteLine($"{item}");
+        }
+
+        // Демонстрация удаления элементов из коллекции.
+        list.Remove(3);
+        list.Remove(4);
+
+        Console.WriteLine("\nИз коллекции удалены элементы \"3\" и \"4\":");
+
+        foreach (var item in list)
+        {
+            Console.WriteLine($"{item}");
+        }
+
+        // Демонстрация работы исключения.
+        Console.WriteLine("\nПопытка добавить null элемент:");
+
+        try
+        {
+            list.AddFirst(null);
+        }
+        catch(ArgumentNullException ex)
+        {
+            Console.WriteLine($"Ошибка! {ex.Message}");
+        }
+
+        // Демонстрация очистки коллекции.
+        list.Clear();
+
+        Console.WriteLine("\nКоллекция отчищена:");
+
+        foreach (var item in list)
+        {
+            Console.WriteLine($"{item}");
         }
     }
 }
