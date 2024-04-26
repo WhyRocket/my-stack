@@ -1,7 +1,5 @@
 ﻿using MyStack.Exceptions;
 using MyStack.Extensions;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MyStack;
 
@@ -9,7 +7,21 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        string[] tasks = 
+        Action[] tasks =
+        {
+            MyLinkedListLinqTask1,
+            MyLinkedListLinqTask2,
+            MyLinkedListLinqTask3,
+            MyLinkedListLinqTask4,
+            MyLinkedListLinqTask5,
+            MyLinkedListLinqTask6,
+            MyLinkedListLinqTask7,
+            MyLinkedListLinqTask8,
+            MyLinkedListLinqTask9,
+            MyLinkedListLinqTask10,
+        };
+
+        string[] conditionOfTask =
             { "1. Дана целочисленная последовательность. Извлечь из нее все нечетные числа, сохранив их исходный порядок следования и удалив все вхождения повторяющихся элементов, кроме первых.",
               "2. Дана целочисленная последовательность. Извлечь из нее все положительные двузначные числа, отсортировав их по возрастанию.",
               "3. Дана строковая последовательность. Строки последовательности содержат только заглавные буквы латинского алфавита. Отсортировать последовательность по возрастанию длин строк, а строки одинаковой длины – по убыванию.",
@@ -24,77 +36,29 @@ internal class Program
 
         Console.WriteLine($"Эта программа демонстрирует использование языка запросов LINQ на примере следующих заданий:\n");
 
-        foreach (string task in tasks)
+        foreach (string task in conditionOfTask)
         {
             Console.WriteLine(task + "\n");
         }
 
         while (true)
         {
+            Console.Write("\nВведите номер задания или любой другой символ для выхода для выхода: ");
 
-            Console.Write("\nВведите номер задания или \"0\" для выхода: ");
-
-            var ans = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-
-            switch (ans)
+            if (Int32.TryParse(Console.ReadLine(), out int taskNumber) && taskNumber > 0 && taskNumber <= 10)
             {
-                case 1:
-                    Console.WriteLine(tasks[0] + "\nРешение:");
-                    MyLinkedListLinqTask1();
-                    break;
 
-                case 2:
-                    Console.WriteLine(tasks[1] + "\nРешение:");
-                    MyLinkedListLinqTask2();
-                    break;
-
-                case 3:
-                    Console.WriteLine(tasks[2] + "\nРешение:");
-                    MyLinkedListLinqTask3();
-                    break;
-
-                case 4:
-                    Console.WriteLine(tasks[3] + "\nРешение:");
-                    MyLinkedListLinqTask4();
-                    break;
-
-                case 5:
-                    Console.WriteLine(tasks[4] + "\nРешение:");
-                    MyLinkedListLinqTask5();
-                    break;
-
-                case 6:
-                    Console.WriteLine(tasks[5] + "\nРешение:");
-                    MyLinkedListLinqTask6();
-                    break;
-
-                case 7:
-                    Console.WriteLine(tasks[6] + "\nРешение:");
-                    MyLinkedListLinqTask7();
-                    break;
-
-                case 8:
-                    Console.WriteLine(tasks[7] + "\nРешение:");
-                    MyLinkedListLinqTask8();
-                    break;
-
-                case 9:
-                    Console.WriteLine(tasks[8] + "\nРешение:");
-                    MyLinkedListLinqTask9();
-                    break;
-
-                case 10:
-                    Console.WriteLine(tasks[9] + "\nРешение:");
-                    MyLinkedListLinqTask10();
-                    break;
-
-                default:
-                    Console.WriteLine();
-                    return;
+                Console.WriteLine(conditionOfTask[taskNumber - 1] + "\nРешение:");
+                tasks[taskNumber - 1]();
+                Console.WriteLine();
+            }
+            else
+            {
+                return;
             }
         }
     }
+
     public static void MyStackDemo()
     {
         MyStack<int> stack = new(10);
@@ -234,91 +198,16 @@ internal class Program
         }
     }
 
-    public static void MyLinkedListLinqDemo()
-    {
-        // Инициализация коллекции.
-        var list = new MyLinkedList<int?>();
-        var rnd = new Random();
-
-        // Демонстрация добавления элементов.
-        list.AddFirst(1);
-        list.AddFirst(2);
-        list.AddFirst(3);
-
-        list.AddLast(4);
-        list.AddLast(5);
-        list.AddLast(6);
-
-        Console.WriteLine("Стартовая коллекция:");
-
-        foreach (var item in list)
-        {
-            Console.WriteLine($"{item}");
-        }
-
-        Console.WriteLine("\nОставляем только четные элементы:");
-
-        var list2 = list.Where(x => x % 2 == 0);
-
-        foreach (var item in list2)
-        {
-            Console.WriteLine($"{item}");
-        }
-
-        Console.WriteLine("\nСортировка по возрастанию:");
-
-        var list3 = list.OrderBy(item => item.Value);
-
-        foreach (var item in list3)
-        {
-            Console.WriteLine($"{item}");
-        }
-
-        Console.WriteLine($"\nМинимальное значение: {list.Min(p => p.Value)}");
-
-        Console.WriteLine($"\nМаксимальное значение: {list.Max(p => p.Value)}");
-
-        Console.WriteLine($"\nСреднее значение: {list.Average(p => p.Value)}");
-
-        Console.WriteLine($"\nСумма: {list.Sum(p => p.Value)}");
-
-        list.Clear();
-
-        for (int i = 0; i < 20; i++)
-        {
-            list.AddFirst(rnd.Next(1000));
-        }
-
-        Console.WriteLine($"\nКоллекция элементов случайных значений:");
-
-        foreach (var item in list)
-        {
-            Console.WriteLine($"{item}");
-        }
-
-        var list4 = list
-            .Where(item => item % 2 == 0)
-            .OrderBy(item => item)
-            .Reverse();
-
-        Console.WriteLine($"\nКоллекция элементов после сортировки:");
-
-        foreach (var item in list4)
-        {
-            Console.WriteLine($"{item}");
-        }
-    }
-
     public static void MyLinkedListLinqTask1()
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными целочисленными значениями.
         for (int i = 0; i < 20; i++)
         {
-            list.AddLast(rnd.Next(10));
+            list.AddLast(random.Next(10));
         }
 
         // Вывод на консоль коллекции.
@@ -339,12 +228,12 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными целочисленными значениями.
         for (int i = 0; i < 30; i++)
         {
-            list.AddLast(rnd.Next(-30, 30));
+            list.AddLast(random.Next(-30, 30));
         }
 
         // Вывод на консоль коллекции.
@@ -365,17 +254,17 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<string>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными строковыми значениями.
         for (int i = 0; i < 30; i++)
         {
             var temp = "";
-            var length = rnd.Next(2, 10);
+            var length = random.Next(2, 10);
 
             for (int j = 0; j < length; j++)
             {
-                temp += (char)rnd.Next(65, 90);
+                temp += (char)random.Next(65, 90);
             }
 
             list.AddLast(temp);
@@ -399,17 +288,17 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<string>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными строковыми значениями.
         for (int i = 0; i < 10; i++)
         {
             var temp = "";
-            var length = rnd.Next(2, 10);
+            var length = random.Next(2, 10);
 
             for (int j = 0; j < length; j++)
             {
-                temp += (char)rnd.Next(65, 90);
+                temp += (char)random.Next(65, 90);
             }
 
             list.AddLast(temp);
@@ -432,12 +321,12 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными целочисленными значениями.
         for (int i = 0; i < 30; i++)
         {
-            list.AddLast(rnd.Next(-30, 30));
+            list.AddLast(random.Next(-30, 30));
         }
 
         // Вывод на консоль коллекции.
@@ -459,12 +348,12 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными целочисленными значениями.
         for (int i = 0; i < 10; i++)
         {
-            list.AddLast(rnd.Next(-30, 30));
+            list.AddLast(random.Next(-30, 30));
         }
         var listIndex = Enumerable.Range(0, list.Count());
         var indexedList = list
@@ -491,23 +380,23 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
         listNew.ToConsole();
     }
-    
+
     public static void MyLinkedListLinqTask7()
     {
         // Инициализация коллекций и значений k1 и k2.
         var list1 = new MyLinkedList<int>();
         var list2 = new MyLinkedList<int>();
 
-        var rnd = new Random();
+        var random = new Random();
 
-        var k1 = rnd.Next(100);
-        var k2 = rnd.Next(100);
+        var k1 = random.Next(100);
+        var k2 = random.Next(100);
 
         // Заполнение коллекций случайными целочисленными значениями.
         for (int i = 0; i < 5; i++)
         {
-            list1.AddLast(rnd.Next(100));
-            list2.AddLast(rnd.Next(100));
+            list1.AddLast(random.Next(100));
+            list2.AddLast(random.Next(100));
         }
 
         // Вывод на консоль коллекций.
@@ -540,13 +429,13 @@ internal class Program
         // Инициализация коллекций.
         var list1 = new MyLinkedList<int>();
         var list2 = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекций случайными целочисленными значениями.
         for (int i = 0; i < 5; i++)
         {
-            list1.AddLast(rnd.Next(100));
-            list2.AddLast(rnd.Next(100));
+            list1.AddLast(random.Next(100));
+            list2.AddLast(random.Next(100));
         }
 
         // Вывод на консоль коллекций.
@@ -556,7 +445,7 @@ internal class Program
         list1.ToConsole();
 
         Console.WriteLine($"\nВторая коллекция");
-        list2.ToConsole();;
+        list2.ToConsole(); ;
 
         // Обработка коллекций.
         var listMerged = list1
@@ -573,13 +462,13 @@ internal class Program
         // Инициализация коллекций.
         var list1 = new MyLinkedList<int>();
         var list2 = new MyLinkedList<int>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекций случайными целочисленными значениями.
         for (int i = 0; i < 5; i++)
         {
-            list1.AddLast(rnd.Next(10));
-            list2.AddLast(rnd.Next(10));
+            list1.AddLast(random.Next(10));
+            list2.AddLast(random.Next(10));
         }
 
         // Вывод на консоль коллекций.
@@ -607,12 +496,12 @@ internal class Program
     {
         // Инициализация коллекции.
         var list = new MyLinkedList<ValueTuple<int, int, int, int>>();
-        var rnd = new Random();
+        var random = new Random();
 
         // Заполнение коллекции случайными целочисленными значениями.
         for (int i = 1; i <= 10; i++)
         {
-            list.AddLast((i, rnd.Next(2020, 2023), rnd.Next(1, 12), rnd.Next(10, 24)));
+            list.AddLast((i, random.Next(2020, 2023), random.Next(1, 12), random.Next(10, 24)));
         }
 
         // Вывод на консоль коллекции.
