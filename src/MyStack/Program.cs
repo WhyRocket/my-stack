@@ -7,6 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        // Инициализация коллекции методов, которые выполняют задания.
         Action[] tasks =
         {
             MyLinkedListLinqTask1,
@@ -21,6 +22,7 @@ internal class Program
             MyLinkedListLinqTask10,
         };
 
+        // Инициализация списка заданий.
         string[] conditionOfTask =
             { "1. Дана целочисленная последовательность. Извлечь из нее все нечетные числа, сохранив их исходный порядок следования и удалив все вхождения повторяющихся элементов, кроме первых.",
               "2. Дана целочисленная последовательность. Извлечь из нее все положительные двузначные числа, отсортировав их по возрастанию.",
@@ -33,7 +35,7 @@ internal class Program
               "9. Даны целочисленные последовательности A и B. Получить последовательность всех различных сумм, в которых первое слагаемое берется из A, а второе из B. Упорядочить полученную последовательность по возрастанию",
               "10. Исходная последовательность содержит сведения о клиентах фитнес-центра. Каждый элемент последовательности включает следующие целочисленные поля: <Код клиента>; <Год>; <Номер месяца>; <Продолжительность занятий (в часах)>; Найти элемент последовательности с минимальной продолжительностью занятий. Вывести эту продолжительность, а также соответствующие ей год и номер месяца (в указанном порядке на той же строке). Если имеется несколько элементов с минимальной продолжительностью, то вывести данные того из них, который является последним в исходной последовательности." };
 
-
+        // Отображение для пользователя полного списка заданий.
         Console.WriteLine($"Эта программа демонстрирует использование языка запросов LINQ на примере следующих заданий:\n");
 
         foreach (string task in conditionOfTask)
@@ -41,6 +43,7 @@ internal class Program
             Console.WriteLine(task + "\n");
         }
 
+        // Цикл, позволяющий последовательно посмотреть все задания.
         while (true)
         {
             Console.Write("\nВведите номер задания или любой другой символ для выхода для выхода: ");
@@ -59,6 +62,7 @@ internal class Program
         }
     }
 
+    // Демонстрация работы стэка, созданного на основе односвязного списка.
     public static void MyStackDemo()
     {
         MyStack<int> stack = new(10);
@@ -198,6 +202,7 @@ internal class Program
         }
     }
 
+    // Задание 1.
     public static void MyLinkedListLinqTask1()
     {
         // Инициализация коллекции.
@@ -224,6 +229,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 2.
     public static void MyLinkedListLinqTask2()
     {
         // Инициализация коллекции.
@@ -250,6 +256,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 3.
     public static void MyLinkedListLinqTask3()
     {
         // Инициализация коллекции.
@@ -283,7 +290,8 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
         listNew.ToConsole();
     }
-
+    
+    // Задание 4.
     public static void MyLinkedListLinqTask4()
     {
         // Инициализация коллекции.
@@ -316,7 +324,8 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
         listNew.ToConsole();
     }
-
+    
+    // Задание 5.
     public static void MyLinkedListLinqTask5()
     {
         // Инициализация коллекции.
@@ -344,6 +353,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 6.
     public static void MyLinkedListLinqTask6()
     {
         // Инициализация коллекции.
@@ -381,6 +391,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 7.
     public static void MyLinkedListLinqTask7()
     {
         // Инициализация коллекций и значений k1 и k2.
@@ -424,6 +435,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 8.
     public static void MyLinkedListLinqTask8()
     {
         // Инициализация коллекций.
@@ -457,6 +469,7 @@ internal class Program
         listMerged.ToConsole();
     }
 
+    // Задание 9.
     public static void MyLinkedListLinqTask9()
     {
         // Инициализация коллекций.
@@ -492,6 +505,7 @@ internal class Program
         listNew.ToConsole();
     }
 
+    // Задание 10.
     public static void MyLinkedListLinqTask10()
     {
         // Инициализация коллекции.
