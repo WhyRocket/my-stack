@@ -37,12 +37,17 @@ public class MyLinkedStack<T>
     // Метод для удаления элемента.
     public T Pop()
     {
-        Node temp;
+        Node node;
 
-        if (_top is not null && _top.Previous is not null)
+        if (_top.Previous is not null)
         {
-            temp = _top;
+            node = _top;
             _top = _top.Previous;
+            Count--;
+        }
+        else if (_top is not null)
+        {
+            node = _top;
             Count--;
         }
         else
@@ -50,7 +55,7 @@ public class MyLinkedStack<T>
             throw new EmptyMyStackException();
         }
 
-        return temp.Value;
+        return node.Value;
     }
 
     // Метод для считывания верхнего элемента.
