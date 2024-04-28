@@ -48,6 +48,7 @@ public class MyLinkedStack<T>
         else if (_top is not null)
         {
             node = _top;
+            _top = null;
             Count--;
         }
         else
