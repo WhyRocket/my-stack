@@ -39,16 +39,10 @@ public class MyLinkedStack<T>
     {
         Node node;
 
-        if (_top is not null && _top.Previous is not null)
+        if (_top is not null)
         {
             node = _top;
             _top = _top.Previous;
-            Count--;
-        }
-        else if (_top is not null)
-        {
-            node = _top;
-            _top = null;
             Count--;
         }
         else
