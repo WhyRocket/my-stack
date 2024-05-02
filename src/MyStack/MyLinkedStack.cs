@@ -1,4 +1,6 @@
-﻿namespace MyStack;
+﻿using MyStack.Exceptions;
+
+namespace MyStack;
 
 public class MyLinkedStack<T>
 {
@@ -33,13 +35,22 @@ public class MyLinkedStack<T>
     }
 
     // Метод для удаления элемента.
-    public void Pop()
+    public T Pop()
     {
-        if (_top is not null && _top.Previous is not null)
+        Node node;
+
+        if (_top is not null)
         {
+            node = _top;
             _top = _top.Previous;
             Count--;
         }
+        else
+        {
+            throw new EmptyMyStackException();
+        }
+
+        return node.Value;
     }
 
     // Метод для считывания верхнего элемента.
@@ -47,7 +58,7 @@ public class MyLinkedStack<T>
     {
         if (_top is null)
         {
-            throw new InvalidOperationException();
+            throw new EmptyMyStackException();
         }
 
         return _top.Value;
