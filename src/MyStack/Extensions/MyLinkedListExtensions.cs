@@ -2,7 +2,7 @@
 
 public static class MyLinkedListExtensions
 {
-    public static void FillCollection<T>(this MyLinkedList<T> list, Func<Random, T> function, int size)
+    public static void AddRange<T>(this MyLinkedList<T> list, Func<Random, T> function, int size)
     {
         Random random = new Random();
 

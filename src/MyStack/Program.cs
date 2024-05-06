@@ -209,7 +209,7 @@ internal class Program
         var list = new MyLinkedList<int>();
 
         // Заполнение коллекции случайными целочисленными значениями.
-        list.FillCollection((Random) => Random.Next(30), 30);
+        list.AddRange((random) => random.Next(30), 30);
 
         // Вывод на консоль коллекции.
         Console.WriteLine($"\nКоллекция элементов случайных значений:");
@@ -231,7 +231,7 @@ internal class Program
         var list = new MyLinkedList<int>();
 
         // Заполнение коллекции случайными целочисленными значениями.
-        list.FillCollection((Random) => Random.Next(-30, 30), 30);
+        list.AddRange((random) => random.Next(-30, 30), 30);
 
         // Вывод на консоль коллекции.
         Console.WriteLine($"\nКоллекция элементов случайных значений:");
@@ -253,14 +253,14 @@ internal class Program
         var list = new MyLinkedList<string>();
 
         // Заполнение коллекции случайными строковыми значениями.
-        list.FillCollection((Random) =>
+        list.AddRange((random) =>
         {
             var temp = "";
-            var length = Random.Next(2, 10);
+            var length = random.Next(2, 10);
 
             for (int i = 0; i < length; i++)
             {
-                temp += (char)Random.Next(65, 90);
+                temp += (char)random.Next(65, 90);
             }
 
             return temp;
@@ -286,14 +286,14 @@ internal class Program
         var list = new MyLinkedList<string>();
 
         // Заполнение коллекции случайными строковыми значениями.
-        list.FillCollection((Random) =>
+        list.AddRange((random) =>
         {
             var temp = "";
-            var length = Random.Next(2, 10);
+            var length = random.Next(2, 10);
 
             for (int i = 0; i < length; i++)
             {
-                temp += (char)Random.Next(65, 90);
+                temp += (char)random.Next(65, 90);
             }
 
             return temp;
@@ -319,7 +319,7 @@ internal class Program
         var list = new MyLinkedList<int>();
 
         // Заполнение коллекции случайными целочисленными значениями.
-        list.FillCollection((Random) => Random.Next(-30, 30), 30);
+        list.AddRange((random) => random.Next(-30, 30), 30);
 
         // Вывод на консоль коллекции.
         Console.WriteLine($"\nКоллекция элементов случайных значений:");
@@ -342,7 +342,7 @@ internal class Program
         var list = new MyLinkedList<int>();
 
         // Заполнение коллекции случайными целочисленными значениями.
-        list.FillCollection((Random) => Random.Next(-30, 30), 10);
+        list.AddRange((random) => random.Next(-30, 30), 10);
 
         var indexes = Enumerable.Range(1, list.Count());
         var indexedList = list
@@ -376,14 +376,14 @@ internal class Program
         var list1 = new MyLinkedList<int>();
         var list2 = new MyLinkedList<int>();
 
-        var random = new Random();
+        var randomNumber = new Random();
 
-        var k1 = random.Next(100);
-        var k2 = random.Next(100);
+        var k1 = randomNumber.Next(100);
+        var k2 = randomNumber.Next(100);
 
         // Заполнение коллекций случайными целочисленными значениями.
-        list1.FillCollection((Random) => Random.Next(100), 5);
-        list2.FillCollection((Random) => Random.Next(100), 5);
+        list1.AddRange((random) => random.Next(100), 5);
+        list2.AddRange((random) => random.Next(100), 5);
 
         // Вывод на консоль коллекций.
         Console.WriteLine($"\nКоллекция элементов случайных значений:\n");
@@ -417,8 +417,8 @@ internal class Program
         var list2 = new MyLinkedList<int>();
 
         // Заполнение коллекций случайными целочисленными значениями.
-        list1.FillCollection((Random) => Random.Next(100), 5);
-        list2.FillCollection((Random) => Random.Next(100), 5);
+        list1.AddRange((random) => random.Next(100), 5);
+        list2.AddRange((random) => random.Next(100), 5);
 
         // Вывод на консоль коллекций.
         Console.WriteLine($"\nКоллекция элементов случайных значений:\n");
@@ -446,8 +446,8 @@ internal class Program
         var list2 = new MyLinkedList<int>();
 
         // Заполнение коллекций случайными целочисленными значениями.
-        list1.FillCollection((Random) => Random.Next(10), 5);
-        list2.FillCollection((Random) => Random.Next(10), 5);
+        list1.AddRange((random) => random.Next(10), 5);
+        list2.AddRange((random) => random.Next(10), 5);
 
         // Вывод на консоль коллекций.
         Console.WriteLine($"\nКоллекция элементов случайных значений:\n");
@@ -475,7 +475,7 @@ internal class Program
         var list = new MyLinkedList<ValueTuple<int, int, int, int>>();
 
         // Заполнение коллекции случайными целочисленными значениями.
-        list.FillCollection((Random) => (list.Count + 1, Random.Next(2020, 2023), Random.Next(1, 12), Random.Next(10, 24)), 10);
+        list.AddRange((random) => (list.Count + 1, random.Next(2020, 2023), random.Next(1, 12), random.Next(10, 24)), 10);
 
         // Вывод на консоль коллекции.
         Console.WriteLine($"\nКоллекция элементов случайных значений:");
