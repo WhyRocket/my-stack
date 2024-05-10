@@ -346,9 +346,9 @@ internal class Program
         // Заполнение коллекции случайными целочисленными значениями.
         list.AddRange((random) => random.Next(-30, 30), 10);
 
-        var indexes = Enumerable.Range(1, list.Count());
+        var indexes = Enumerable.Range(1, list.Count);
         var indexedList = list
-            .Zip(indexes, (Value, Index) => (Index, Value));
+            .Zip(indexes, (value, index) => (Index: index, Value: value));
 
         // Вывод на консоль коллекции.
         Console.WriteLine($"\nКоллекция элементов случайных значений:");
@@ -358,7 +358,7 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
 
         indexedList
-            .Where(indexedItem => !(indexedItem.Index % 3 == 0))
+            .Where(indexedItem => indexedItem.Index % 3 != 0)
             .Select(indexedItem =>
             {
                 if (indexedItem.Index % 3 == 1)
@@ -400,13 +400,8 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
 
         list1
-            .Where(item => item > k1);
-
-        list2
-            .Where(item => item < k2);
-
-        list1
-            .Union(list2)
+            .Where(item => item > k1)
+            .Union(list2.Where(item => item < k2))
             .OrderBy(item => item)
             .ToConsole();
     }
@@ -435,8 +430,8 @@ internal class Program
         Console.WriteLine($"\nОбработанная коллекция:");
 
         list1
-            .Join(list2, Item1 => Item1 % 10, Item2 => Item2 % 10, (Item1, Item2) => (value1: Item1, value2: Item2))
-            .Select(item => $"{item.value1}-{item.value2}")
+            .Join(list2, item1 => item1 % 10, item2 => item2 % 10, (item1, item2) => (Value1: item1, Value2: item2))
+            .Select(item => $"{item.Value1}-{item.Value2}")
             .ToConsole();
     }
 
@@ -474,7 +469,7 @@ internal class Program
     public static void MyLinkedListLinqTask10()
     {
         // Инициализация коллекции.
-        var list = new MyLinkedList<ValueTuple<int, int, int, int>>();
+        var list = new MyLinkedList<(int, int, int, int)>();
 
         // Заполнение коллекции случайными целочисленными значениями.
         list.AddRange((random) => (list.Count + 1, random.Next(2020, 2023), random.Next(1, 12), random.Next(10, 24)), 10);
